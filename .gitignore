@@ -1,0 +1,6 @@
+#Hololens git ignore file
+/*
+!/Assets
+!/ProjectSettings
+!.gitignore
+!README.md
