@@ -245,39 +245,43 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
         RaycastHit hitInfo;
         if (Physics.Raycast(headPosition, gazeDirection, out hitInfo, 30.0f))
         {
-            //hit!
-            //Debug.Log("Backend: createMenu - hit");
             position = hitInfo.point;
-            //orientation = Quaternion.LookRotation(-hitInfo.normal);
-            orientation = Quaternion.FromToRotation(Vector3.forward,-hitInfo.normal);
+            orientation = Quaternion.identity;
             
             float wallInclinationThreshold = 10.0F;
 
-            Vector3 normalVerticalProjection = new Vector3(0.0F, orientation.y, 0.0F);
-            Vector3 normalHorizontalProjection = new Vector3(orientation.x, 0.0F, orientation.z);
+            Vector3 normalVerticalProjection = new Vector3(0.0F, hitInfo.normal.y, 0.0F);
+            Vector3 normalHorizontalProjection = new Vector3(hitInfo.normal.x, 0.0F, hitInfo.normal.z);
 
             bool isWall = normalHorizontalProjection.magnitude / normalVerticalProjection.magnitude > wallInclinationThreshold;
             if (isWall)
             {
-                //orientation.y = 0;
-                //orientation.z = 0;
+                //Debug.Log("Wall");
+                orientation = Quaternion.LookRotation(-hitInfo.normal);
             }
             else
             {
-                bool isFloor = normalVerticalProjection.magnitude / normalHorizontalProjection.magnitude > wallInclinationThreshold;
-                if (isFloor)
+                bool isFloorOrRoof = normalVerticalProjection.magnitude / normalHorizontalProjection.magnitude > wallInclinationThreshold;
+                if (isFloorOrRoof)
                 {
-                    //orientation.y = 0;
-                    //orientation.z = 0;
+                    if (hitInfo.normal.y > 0)
+                    {
+                        //Debug.Log("Floor");
+                        orientation = Quaternion.LookRotation(-hitInfo.normal, Camera.main.transform.forward);
+                    }
+                    else
+                    {
+                        //Debug.Log("Roof");
+                        orientation = Quaternion.LookRotation(-hitInfo.normal, -Camera.main.transform.forward);
+                    }
                 }
             }
         }
         else
         {
-            //2m in front
-            //Debug.Log("Backend: createMenu - no hit");
-            position = headPosition + 2f * gazeDirection;
-            orientation = Camera.main.transform.localRotation;
+            //Debug.Log("Floating menu");
+            position = headPosition + 2f * gazeDirection; //2m in front
+            orientation = Camera.main.transform.localRotation; // facing user
             orientation.x = 0;
             orientation.z = 0;
         }
@@ -310,8 +314,7 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
 
     public void onCommandSet(string output)
     {
-        Debug.Log("Command: " + output);
-        //?
+        //Debug.Log("Command: " + output);
     }
 
     /// <summary>
