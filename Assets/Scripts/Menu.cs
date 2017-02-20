@@ -25,7 +25,8 @@ public class Menu
         Hashtable a = (Hashtable)JSON.JsonDecode(json);
 
         title = (string)a["title"];
-        
+        background = (string)a["background"];
+
         foreach (Hashtable entry in (ArrayList)a["inputs"])
         {
             MenuInput anInput = new MenuInput();
@@ -70,6 +71,7 @@ public class Menu
     }
 
     public string title = null;
+    public string background = null;
     public List<MenuInput> inputs = new List<MenuInput>();
     public List<ListItem> list = new List<ListItem>();
 

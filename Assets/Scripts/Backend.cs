@@ -40,18 +40,6 @@ public class Backend : Singleton<Backend> {
                 Debug.Log("Error loading prefabs");
             }
         }
-        /*if (NotificationObject == null)
-        {
-            try
-            {
-                NotificationObject = GameObject.Find("Notification");
-                NotificationObject.SetActive(false);
-            }
-            catch
-            {
-                Debug.Log("Error loading prefabs");
-            }
-        }*/
     }
 
     void Update()
@@ -92,32 +80,7 @@ public class Backend : Singleton<Backend> {
         if (MenuPrefab != null)
         {
             Debug.Log("Backend: createMenu - start");
-            //find position gaze or +2m
-            /*var headPosition = Camera.main.transform.position;
-            var gazeDirection = Camera.main.transform.forward;
-            Vector3 position;
-            Quaternion toQuat;
-            RaycastHit hitInfo;
-            if (Physics.Raycast(headPosition, gazeDirection, out hitInfo, 30.0f))//, HoloToolkit.Unity.SpatialMapping.PhysicsRaycastMask))
-            {
-                //hit!
-                Debug.Log("Backend: createMenu - hit");
-                position = hitInfo.point;
-                toQuat = Quaternion.LookRotation(-hitInfo.normal);
-            }
-            else
-            {
-                //2m in front
-                Debug.Log("Backend: createMenu - no hit");
-                position = headPosition + 2f * gazeDirection;
-                toQuat = Camera.main.transform.localRotation;
-                toQuat.x = 0;
-                toQuat.z = 0;
-            }
-            */
-            //GameObject menu = Instantiate(MenuPrefab, position, toQuat).gameObject;
             GameObject menu = Instantiate(MenuPrefab).gameObject;
-
             ((MenuScript)menu.GetComponent(typeof(MenuScript))).setId(id);
         }
         else
@@ -136,11 +99,18 @@ public class Backend : Singleton<Backend> {
         return "?cache=" + (cacheNumber++).ToString();
     }
 
-    public void requestMenu (string id, Action<string> callback)
+    public void requestMenu(string id, Action<string> callback)
     {
         String url = adress + "menu/" + id + noCache();
         WWW www = new WWW(url);
         StartCoroutine(GetText(www, callback));
+    }
+
+    public void requestImage(string id, Action<Texture2D> callback)
+    {
+        String url = adress + "image/" + id + noCache();
+        WWW www = new WWW(url);
+        StartCoroutine(GetImage(www, callback));
     }
 
     public void sendCommand (string menuId, string commandId, string value, Action<string> callback)
@@ -151,17 +121,30 @@ public class Backend : Singleton<Backend> {
         StartCoroutine(GetText(www, callback));
     }
 
-    IEnumerator GetText (WWW www, Action<string> callback)
+    IEnumerator GetText(WWW www, Action<string> callback)
     {
         yield return www;
         if (www.error == null)
         {
-            Debug.Log("WWW Ok!");
+            //Debug.Log("WWW Ok!");
         }
         else
         {
             Debug.Log("WWW Error: " + www.error);
         }
         callback(www.text);
+    }
+    IEnumerator GetImage(WWW www, Action<Texture2D> callback)
+    {
+        yield return www;
+        if (www.error == null)
+        {
+            //Debug.Log("WWW Ok!");
+        }
+        else
+        {
+            Debug.Log("WWW Error: " + www.error);
+        }
+        callback(www.texture);
     }
 }

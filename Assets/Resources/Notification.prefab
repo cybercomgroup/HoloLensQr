@@ -81,7 +81,7 @@ TextMesh:
   m_GameObject: {fileID: 1103785046502230}
   m_Text: Notification
   m_OffsetZ: 0
-  m_CharacterSize: 0.075
+  m_CharacterSize: 0.05
   m_LineSpacing: 1
   m_Anchor: 4
   m_Alignment: 1

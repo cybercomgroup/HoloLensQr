@@ -112,10 +112,18 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
         }
         theInputsId.Clear();
 
+        //hides any image
+        transform.Find("Canvas/Image").gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        
         //Build new menu
         try
         {
             ((Text)transform.Find("Canvas/TitleBar/Title").gameObject.GetComponent(typeof(Text))).text = menu.title;
+
+            if (menu.background != null)
+            {
+                Backend.Instance.requestImage(menu.background, onImageDownloaded);
+            }
 
             foreach (Menu.MenuInput entry in menu.inputs)
             {
@@ -243,26 +251,27 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
         Vector3 position;
         Quaternion orientation;
         RaycastHit hitInfo;
-        if (Physics.Raycast(headPosition, gazeDirection, out hitInfo, 30.0f))
+        var layermask = 1 << 31; // 31: Physics layer
+        if (Physics.Raycast(headPosition, gazeDirection, out hitInfo, 30.0f, layermask))
         {
             position = hitInfo.point;
-            orientation = Quaternion.identity;
-            
+            orientation = Quaternion.LookRotation(-hitInfo.normal);
+
             float wallInclinationThreshold = 10.0F;
 
             Vector3 normalVerticalProjection = new Vector3(0.0F, hitInfo.normal.y, 0.0F);
             Vector3 normalHorizontalProjection = new Vector3(hitInfo.normal.x, 0.0F, hitInfo.normal.z);
 
-            bool isWall = normalHorizontalProjection.magnitude / normalVerticalProjection.magnitude > wallInclinationThreshold;
-            if (isWall)
+            bool isVertical = normalHorizontalProjection.magnitude / normalVerticalProjection.magnitude > wallInclinationThreshold;
+            if (isVertical)
             {
                 //Debug.Log("Wall");
                 orientation = Quaternion.LookRotation(-hitInfo.normal);
             }
             else
             {
-                bool isFloorOrRoof = normalVerticalProjection.magnitude / normalHorizontalProjection.magnitude > wallInclinationThreshold;
-                if (isFloorOrRoof)
+                bool isHorizontal = normalVerticalProjection.magnitude / normalHorizontalProjection.magnitude > wallInclinationThreshold;
+                if (isHorizontal)
                 {
                     if (hitInfo.normal.y > 0)
                     {
@@ -285,8 +294,9 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
             orientation.x = 0;
             orientation.z = 0;
         }
-        transform.position = position;
-        transform.rotation = orientation;
+
+        transform.position = Vector3.Lerp(transform.position, position, 0.1f);
+        transform.rotation = Quaternion.Lerp(transform.rotation, orientation, 0.1f);
     }
 
     public void startMove()
@@ -346,6 +356,23 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
         }
     }
 
+    public void onImageDownloaded(Texture2D image)
+    {
+        try
+        {
+            Rect rec = new Rect(0, 0, image.width, image.height);
+            Sprite sprite = Sprite.Create(image, rec, new Vector2(0.5f, 0.5f), 1);
+            GameObject localImage = transform.Find("Canvas/Image").gameObject;
+            Image theImage = localImage.GetComponent<Image>();
+            theImage.color = new Color(1, 1, 1, 1);
+            theImage.sprite = sprite;
+        }
+        catch
+        {
+            Debug.Log("Error loading image");
+        }
+    }
+        
     public void OnPointerClick(PointerEventData eventData)
     {
         if (isMoving)
