@@ -1,0 +1,27 @@
+{
+    "inputs": [
+        {
+            "text": "<size=30>Some values from Gustavs computer...</size>", 
+            "type": "text", 
+            "id": "text"
+        }
+    ], 
+    "list": [
+        {
+            "text": "", 
+            "id": "time", 
+            "title": "Time:"
+        }, 
+        {
+            "text": "32.0", 
+            "id": "cpu", 
+            "title": "CPU (%):"
+        }, 
+        {
+            "text": "C:34.69% free", 
+            "id": "hard_drive", 
+            "title": "Hard drive(s):"
+        }
+    ], 
+    "title": "Sensors"
+}
