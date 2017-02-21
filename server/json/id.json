@@ -1,0 +1,105 @@
+{
+    "inputs": [
+        {
+            "text": "<size=30>Description: </size> This is \"the\" description. Here we can use <b><i>styles</i></b> and <color=red>effects</color>.", 
+            "type": "text", 
+            "id": "textcommand"
+        }, 
+        {
+            "buttons": [
+                {
+                    "text": "Push me1", 
+                    "id": "buttoncommand11", 
+                    "value": "on"
+                }, 
+                {
+                    "text": "Push me2", 
+                    "id": "buttoncommand21", 
+                    "value": "on"
+                }, 
+                {
+                    "text": "Push me2", 
+                    "id": "buttoncommand31", 
+                    "value": "on"
+                }, 
+                {
+                    "text": "Push me4", 
+                    "id": "buttoncommand41", 
+                    "value": "on"
+                }
+            ], 
+            "type": "buttons"
+        }, 
+        {
+            "text": "Write here", 
+            "type": "input", 
+            "id": "inputcommand", 
+            "value": "323"
+        }, 
+        {
+            "text": "Slider:", 
+            "type": "slider", 
+            "id": "slidercommand", 
+            "value": "0.8"
+        }, 
+        {
+            "text": "Status", 
+            "type": "indicator", 
+            "id": "indicatorcommand", 
+            "value": "on"
+        }
+    ], 
+    "list": [
+        {
+            "text": "Text for this item", 
+            "id": "list1", 
+            "title": "The2Title"
+        }, 
+        {
+            "text": "Text for this item (same same...)", 
+            "id": "list2", 
+            "title": "The Second Title"
+        }, 
+        {
+            "text": "Text for this item, Text for this item, Text for this item, Text for this item (long text.)", 
+            "id": "list3", 
+            "title": "The Third Title"
+        }, 
+        {
+            "text": "Text for this item (same same...)", 
+            "id": "list4", 
+            "title": "You get it"
+        }, 
+        {
+            "text": "Text for this item (same same...)", 
+            "id": "list6", 
+            "title": "You get it"
+        }, 
+        {
+            "text": "Text for this item (same same...)", 
+            "id": "list7", 
+            "title": "You get it"
+        }, 
+        {
+            "text": "Text for this item (same same...)", 
+            "id": "list8", 
+            "title": "You get it"
+        }, 
+        {
+            "text": "Text for this item (same same...)", 
+            "id": "list9", 
+            "title": "You get it"
+        }, 
+        {
+            "text": "Text for this item (same same...)", 
+            "id": "list10", 
+            "title": "You get it"
+        }, 
+        {
+            "text": "Text for this item (same same...)", 
+            "id": "list5", 
+            "title": "5...?"
+        }
+    ], 
+    "title": "New Title 2!"
+}

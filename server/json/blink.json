@@ -1,0 +1,16 @@
+{
+	"title": "Blinking LED", 
+	"background": "a.png", 
+	"inputs": [
+		{"type":"text", "text": "<b>Instructions: </b> To control the LED's, either use the buttons or set an RGB value for them all.", "id": "textcommand"},
+		{"type":"buttons", "buttons": [
+			{"text": "Blink", "id": "randomblink", "value": "on"},
+			{"text": "All random", "id": "randomcolor", "value": "on"},
+			{"text": "Random color", "id": "setrandom", "value": "on"},
+			{"text": "Off", "id": "changecolor", "value": "000000"}
+		]},
+		{"type":"input", "text": "Set color", "id": "changecolor", "value": "ff0000"}
+	], 
+	"list": [
+	]
+}

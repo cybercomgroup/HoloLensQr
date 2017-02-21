@@ -1,0 +1,53 @@
+{
+    "inputs": [
+        {
+            "text": "Write something in the textbox.", 
+            "type": "text", 
+            "id": "text"
+        }, 
+        {
+            "text": "Message", 
+            "type": "input", 
+            "id": "input", 
+            "value": ""
+        }, 
+        {
+            "buttons": [
+                {
+                    "text": "Clear", 
+                    "id": "clear", 
+                    "value": "on"
+                }
+            ], 
+            "type": "buttons"
+        }
+    ], 
+    "list": [
+        {
+            "text": "Hej", 
+            "id": "16:59:45", 
+            "title": "16:59:45"
+        }, 
+        {
+            "text": "Hej igen", 
+            "id": "16:59:56", 
+            "title": "16:59:56"
+        }, 
+        {
+            "text": "a", 
+            "id": "08:15:53", 
+            "title": "08:15:53"
+        }, 
+        {
+            "text": "a", 
+            "id": "08:15:53 (1)", 
+            "title": "08:15:53"
+        }, 
+        {
+            "text": "a", 
+            "id": "08:15:54", 
+            "title": "08:15:54"
+        }
+    ], 
+    "title": "Chat"
+}

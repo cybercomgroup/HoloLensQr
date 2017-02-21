@@ -1,0 +1,7 @@
+{
+	"title": "404", 
+	"inputs": [
+		{"type":"text", "text": "Cound not find id on server.", "id": "textcommand"}
+	], 
+	"list": []
+}

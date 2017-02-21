@@ -1,0 +1,27 @@
+{
+	"title": "New Title 2!", 
+	"inputs": [
+		{"type":"text", "text": "<size=30>Description: </size> This is \"the\" description. Here we can use <b><i>styles</i></b> and <color=red>effects</color>.", "id": "textcommand"},
+		{"type":"buttons", "buttons": [
+			{"text": "Push me1", "id": "buttoncommand11", "value": "on"},
+			{"text": "Push me2", "id": "buttoncommand21", "value": "on"},
+			{"text": "Push me2", "id": "buttoncommand31", "value": "on"},
+			{"text": "Push me4", "id": "buttoncommand41", "value": "on"}
+		]},
+		{"type":"input", "text": "Write here", "id": "inputcommand", "value": "42"},
+		{"type":"slider", "text": "Slider:", "id": "slidercommand", "value": "0.8"},
+		{"type":"indicator", "text": "Status", "id": "indicatorcommand", "value": "on"}
+	], 
+	"list": [
+		{"title": "The2Title", "id": "list1", "text": "Text for this item"}, 
+		{"title": "The Second Title", "id": "list2", "text": "Text for this item (same same...)"},
+		{"title": "The Third Title", "id": "list3", "text": "Text for this item, Text for this item, Text for this item, Text for this item (long text.)"},
+		{"title": "You get it", "id": "list4", "text": "Text for this item (same same...)"},
+		{"title": "You get it", "id": "list6", "text": "Text for this item (same same...)"},
+		{"title": "You get it", "id": "list7", "text": "Text for this item (same same...)"},
+		{"title": "You get it", "id": "list8", "text": "Text for this item (same same...)"},
+		{"title": "You get it", "id": "list9", "text": "Text for this item (same same...)"},
+		{"title": "You get it", "id": "list10", "text": "Text for this item (same same...)"},
+		{"title": "5...?", "id": "list5", "text": "Text for this item (same same...)"}
+	]
+}
