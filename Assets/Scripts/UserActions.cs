@@ -1,7 +1,5 @@
 ﻿using HoloToolkit.Unity;
 using HoloToolkit.Unity.InputModule;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UserActions : Singleton<UserActions> {
@@ -17,7 +15,7 @@ public class UserActions : Singleton<UserActions> {
     //Closes the (if any) gazed at menu
     public void CloseMenu()
     {
-        MenuScript theMenu = GazeMenu();
+        MenuScript theMenu = MenuGazedAt();
         if (theMenu != null)
         {
             theMenu.close();
@@ -27,14 +25,18 @@ public class UserActions : Singleton<UserActions> {
     //Starts movig the (if any) gazed at menu
     public void MoveMenu()
     {
-        MenuScript theMenu = GazeMenu();
+        MenuScript theMenu = MenuGazedAt();
         if (theMenu != null)
         {
             theMenu.startMove();
         }
     }
 
-    private MenuScript GazeMenu()
+    /// <summary>
+    /// Returns the menu currently gazed at
+    /// </summary>
+    /// <returns>The MenuScript of the menu</returns>
+    private MenuScript MenuGazedAt()
     {
         if (GazeManager.Instance.IsGazingAtObject)
         {
@@ -54,6 +56,5 @@ public class UserActions : Singleton<UserActions> {
         {
             movingMenu.stopMove();
         }
-        //movingMenu = null;
     }
 }
