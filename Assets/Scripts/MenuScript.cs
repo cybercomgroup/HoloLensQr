@@ -302,12 +302,14 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
     public void startMove()
     {
         isMoving = true;
+        UserActions.Instance.movingMenu = this;
         SpatialMappingManager.Instance.StartObserver();
         TapToPlaceObject.SetActive(true);
     }
     public void stopMove()
     {
         isMoving = false;
+        UserActions.Instance.movingMenu = null;
         SpatialMappingManager.Instance.StopObserver();
         TapToPlaceObject.SetActive(false);
     }

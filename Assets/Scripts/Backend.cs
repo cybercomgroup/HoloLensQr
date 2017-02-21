@@ -2,7 +2,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Backend : Singleton<Backend> {
     protected Backend() { }
@@ -77,6 +76,10 @@ public class Backend : Singleton<Backend> {
 
     public void createMenu (string id)
     {
+        if (note != null)
+        {
+            Destroy(note);
+        }
         if (MenuPrefab != null)
         {
             Debug.Log("Backend: createMenu - start");
