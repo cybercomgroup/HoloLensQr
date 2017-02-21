@@ -2,6 +2,7 @@ from Bstick import Bstick
 from flask import Flask, jsonify, request
 import psutil
 import threading
+import time
 from random import randint
 
 app = Flask(__name__)
@@ -94,6 +95,7 @@ def run_spaz_loop():
     while run_loop:
         if spazing_out_flag == True:
             bstick.spaz_out()
+        time.sleep(0.01)
 
 
 def stop_loop():
