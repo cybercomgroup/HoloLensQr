@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UserActions : Singleton<UserActions> {
 
-    public MenuScript movingMenu = null;
+    public MenuScript MovingMenu { get; set; }
     
     //Starts scanning 
     public void ScanQR()
@@ -52,9 +52,9 @@ public class UserActions : Singleton<UserActions> {
     //Places the currently (if any) moving menu
     public void PlaceMenu()
     {
-        if (movingMenu != null)
+        if (MovingMenu != null)
         {
-            movingMenu.stopMove();
+            MovingMenu.stopMove();
         }
     }
 }
