@@ -13,8 +13,7 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
     private string menuId = "default"; // 404
     private Menu menu = null;
     private bool isMoving = false;
-    WorldAnchor anchor;
-
+    
     public Transform ListItemPrefab;
     public Transform ButtonsPrefab;
     public Transform ButtonPrefab;
@@ -245,6 +244,9 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
         Backend.Instance.requestMenu(menuId, onMenuDownloaded);
     }
 
+    /// <summary>
+    /// Moves and rotates the menu 10% closer to where the user is gazing at. After a sudden movement it will be 10% from its target at 0.3 s and 0.2% from its target at 1 s (with 60 fps).
+    /// </summary>
     private void move()
     { 
         //find position gazing at
@@ -301,6 +303,9 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
         transform.rotation = Quaternion.Lerp(transform.rotation, orientation, 0.1f);
     }
 
+    /// <summary>
+    /// Sets the menu in the move mode.
+    /// </summary>
     public void startMove()
     {
         DestroyImmediate(gameObject.GetComponent<WorldAnchor>());
@@ -309,13 +314,30 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
         SpatialMappingManager.Instance.StartObserver();
         TapToPlaceObject.SetActive(true);
     }
+
+    /// <summary>
+    /// Places the menu
+    /// </summary>
     public void stopMove()
     {
         SpatialMappingManager.Instance.StopObserver();
         isMoving = false;
         UserActions.Instance.MovingMenu = null;
         TapToPlaceObject.SetActive(false);
-        anchor = gameObject.AddComponent<WorldAnchor>();
+        WorldAnchor anchor = gameObject.AddComponent<WorldAnchor>();
+        anchor.OnTrackingChanged += Anchor_OnTrackingChanged;
+    }
+
+    /// <summary>
+    /// Event function called if something happens to the world anchor to which it is attached.
+    /// </summary>
+    /// <param name="self"></param>
+    /// <param name="located"></param>
+    private void Anchor_OnTrackingChanged(WorldAnchor self, bool located)
+    {
+        Debug.Log("World Anchor changed to " + located.ToString());
+        // This simply activates/deactivates this object and all children when tracking changes
+        //self.gameObject.SetActive(located);
     }
 
     /// <summary>
@@ -328,6 +350,10 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
         Backend.Instance.sendCommand(menuId, id, value, onCommandSet);
     }
 
+    /// <summary>
+    /// Callback function when a command has been set (when a button is clicked and it is sent to the server)
+    /// </summary>
+    /// <param name="output"></param>
     public void onCommandSet(string output)
     {
         //Debug.Log("Command: " + output);
@@ -362,6 +388,10 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
         }
     }
 
+    /// <summary>
+    /// Callback function wich updates the menu background with the downloaded menu.
+    /// </summary>
+    /// <param name="image"></param>
     public void onImageDownloaded(Texture2D image)
     {
         try
@@ -379,6 +409,10 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
         }
     }
         
+    /// <summary>
+    /// Places the menu when it is clicked if it was moving. Otherwise it does nothing.
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
         if (isMoving)
