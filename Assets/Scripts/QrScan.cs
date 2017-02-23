@@ -1,15 +1,28 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.VR.WSA.Input;
 
 public class QrScan : MonoBehaviour
 {
     //public Transform textMeshObject;
+
+    //Only used for demomode:
+    bool demomode = true;
+    GestureRecognizer recognizer;
+    int whatid = 0;
+    string[] id = new string[] { "qrint:blink", "qrint:sensor" };
     
     private void Start()
     {
         //this.textMesh = this.textMeshObject.GetComponent<TextMesh>();
         //this.OnReset();
         //Debug.Log("QR start");
+        recognizer = new GestureRecognizer();
+        recognizer.SetRecognizableGestures(GestureSettings.Tap);
+        recognizer.TappedEvent += (source, tapCount, ray) =>
+        {
+            bogusFound();
+        };
     }
     public void OnScan()
     {
@@ -17,6 +30,13 @@ public class QrScan : MonoBehaviour
         Debug.Log("QR scanning");
         Backend.Instance.showNote("Scanning...");
         //show headsup.
+
+        if (demomode) //demomode
+        {
+            recognizer.StartCapturingGestures();
+        }
+        else
+        {
 
 #if !UNITY_EDITOR
     MediaFrameQrProcessing.Wrappers.ZXingQrCodeScanner.ScanFirstCameraForQrCode(
@@ -30,7 +50,21 @@ public class QrScan : MonoBehaviour
         },
         TimeSpan.FromSeconds(10));
 #endif
+        } //end of demomode else
     }
+
+    //used in demomode
+    private void bogusFound()
+    {
+        recognizer.StopCapturingGestures();
+        if (whatid >= id.Length)
+        {
+            whatid = 0;
+        }
+        onFound(id[whatid]);
+        whatid++;
+    }
+
     public void OnReset()
     {
         //this.textMesh.text = "say scan to start";
