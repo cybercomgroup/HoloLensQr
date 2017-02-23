@@ -82,8 +82,8 @@ public class Backend : Singleton<Backend> {
         }
         if (MenuPrefab != null)
         {
-            Debug.Log("Backend: createMenu - start");
-            GameObject menu = Instantiate(MenuPrefab).gameObject;
+            Debug.Log("Backend: Create Menu");
+            GameObject menu = Instantiate(MenuPrefab);
             ((MenuScript)menu.GetComponent(typeof(MenuScript))).setId(id);
         }
         else
