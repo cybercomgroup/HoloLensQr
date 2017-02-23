@@ -5,13 +5,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using UnityEngine.VR.WSA;
+using UnityEngine.VR.WSA.Persistence;
 
 public class MenuScript : MonoBehaviour, IPointerClickHandler {
 
     private string menuId = "default"; // 404
     private Menu menu = null;
     private bool isMoving = false;
-    
+    WorldAnchor anchor;
+
     public Transform ListItemPrefab;
     public Transform ButtonsPrefab;
     public Transform ButtonPrefab;
@@ -64,7 +67,6 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
                 Debug.Log("Error setting up menu");
             }
         }
-        
         startMove();
     }
 
@@ -113,7 +115,7 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
         theInputsId.Clear();
 
         //hides any image
-        transform.Find("Canvas/Image").gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 1);
+        transform.Find("Canvas/Image").gameObject.GetComponent<Image>().color = new Color(1, 1, 1, 0);
         
         //Build new menu
         try
@@ -301,6 +303,7 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
 
     public void startMove()
     {
+        DestroyImmediate(gameObject.GetComponent<WorldAnchor>());
         isMoving = true;
         UserActions.Instance.MovingMenu = this;
         SpatialMappingManager.Instance.StartObserver();
@@ -308,10 +311,11 @@ public class MenuScript : MonoBehaviour, IPointerClickHandler {
     }
     public void stopMove()
     {
+        SpatialMappingManager.Instance.StopObserver();
         isMoving = false;
         UserActions.Instance.MovingMenu = null;
-        SpatialMappingManager.Instance.StopObserver();
         TapToPlaceObject.SetActive(false);
+        anchor = gameObject.AddComponent<WorldAnchor>();
     }
 
     /// <summary>
