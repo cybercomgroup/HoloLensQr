@@ -11,7 +11,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: Cybercom
-  productName: HoloLensQr
+  productName: QR Menus
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13333334, g: 0.17254902, b: 0.21176471, a: 1}
@@ -389,17 +389,17 @@ PlayerSettings:
   additionalIl2CppArgs: 
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: HolLensQR
+  metroPackageName: QRMenus
   metroPackageVersion: 1.0.0.0
   metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
   metroCertificateNotAfter: 00ccc2ae2c9dd301
-  metroApplicationDescription: HoloLens QR
+  metroApplicationDescription: QR Menus
   wsaImages:
     2228374: Assets/Icon-465.png
-  metroTileShortName: HoloLensQr
+  metroTileShortName: QR Menus
   metroCommandLineArgsFile: 
   metroTileShowName: 0
   metroMediumTileShowName: 0
