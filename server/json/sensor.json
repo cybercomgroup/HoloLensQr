@@ -13,12 +13,12 @@
             "title": "Time:"
         }, 
         {
-            "text": "32.0", 
+            "text": "", 
             "id": "cpu", 
             "title": "CPU (%):"
         }, 
         {
-            "text": "C:34.69% free", 
+            "text": "", 
             "id": "hard_drive", 
             "title": "Hard drive(s):"
         }
