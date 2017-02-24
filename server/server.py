@@ -36,7 +36,7 @@ def fixfile(file, id, value, field='value'):
 			return "OK"
 	return "NOK"
 
-def chat(file,id, value):
+def chat(file, id, value):
 	with open('json/'+file+'.json') as input_file:
 		data = json.load(input_file)
 		if id=="input":
@@ -58,7 +58,7 @@ def chat(file,id, value):
 					new_list.append(data["list"][i])
 				data["list"] = new_list
 			data["list"].append(item)
-			with open(file+'.json', 'w') as output_file:
+			with open('json/'+file+'.json', 'w') as output_file:
 				output_file.writelines( json.dumps(data, indent=4) )
 			return "Added message"
 		elif id == "clear":
