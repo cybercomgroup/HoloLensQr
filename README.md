@@ -1,6 +1,6 @@
 # HoloLensQr
 
-This is a small HoloLens app that can read QR codes and from a server (currently hardcoded) load the corresponding menu. The QR codes needs to have the prefix "qrint:" as some kind of protocol.
+This is a small HoloLens app that can read QR codes and from a server load the corresponding menu. The QR codes needs to have the prefix "qrint:" as some kind of protocol.
 
 
 To read QR codes it uses the following libraries:
@@ -9,6 +9,11 @@ To read QR codes it uses the following libraries:
 
 Image for LED from:
 * https://commons.wikimedia.org/wiki/File:RBG-LED.jpg
+
+## Requirements
+* Unity
+* Visual studio (ensure that Tools (1.4) and Windows 10 SDK (10.0.10586) is enabled under Universal Windows App Development Tools node)
+* Python (only if running the server)
 
 ## Setup
 
@@ -24,6 +29,8 @@ Setup with server (outside Cybercom Gothenburg)
 * Open directory in Unity
 * Change ip in "/Assets/Scripts/Backend.cs" to your server address
 * Build in Unity and compile/deploy in Visual Studio
+
+## Settings
 
 Unity settings:
 * Build settings -> Plattform -> Windows store
@@ -41,4 +48,4 @@ VS settings:
 * Start (without) debugging
 
 ## Demoversion
-Demoversion can be activated by setting demomode to true in "/Assets/Scripts/QrScan.cs". It excludes scanning wich is needed if you are recording or showing content from the webcam. To fetch menus when scanning, just airtap anywhere.
+Demoversion can be (de)activated by setting demomode to true/false in "/Assets/Scripts/QrScan.cs". It excludes scanning wich is needed if you are recording or showing content from the webcam. To fetch menus when scanning in demomode, just airtap anywhere.
