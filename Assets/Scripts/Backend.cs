@@ -7,7 +7,7 @@ public class Backend : Singleton<Backend> {
     protected Backend() { }
 
     private int cacheNumber = 0;
-    private string adress = "http://10.90.131.67/";
+    private string adress = "http://10.90.131.145/";
 
     public GameObject MenuPrefab = null;
     public GameObject NotificationPrefab = null;
